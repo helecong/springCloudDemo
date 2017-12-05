@@ -1,0 +1,47 @@
+logging:
+  path: /log
+  level:
+    org.springframework.security: INFO
+    project.user.UserClient: DEBUG
+    
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka/
+
+#security:
+#  oauth2:
+#    resource:
+#      user-info-uri: http://localhost:5000/uaa/users/current
+
+spring:
+  rabbitmq:
+    host: rabbitmq
+  zipkin:
+    base-url: http://zipkin:7000
+    
+# feign 配置
+feign:
+  #断路器 开启
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: 
+      min-request-size: 2048
+    response:
+      enabled: true
+  
+    

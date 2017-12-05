@@ -1,0 +1,10 @@
+--
+本项目为，为spring cloud config
+主要用于提供各服务得配置信息，及配置切换等管理，
+
+-- 给服务默认端口说明
+  - config : 8888				配置中心
+  - regist : 8761				服务注册中心
+  - zipkin : 7000				服务链路跟踪总服务
+  - useraccount : 8000			用户服务
+  - website-api : 8080			前端API接口

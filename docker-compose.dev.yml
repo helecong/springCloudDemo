@@ -1,0 +1,51 @@
+version: '2.1'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+ 
+  config:
+    build: base-config
+    container_name: config
+    ports:
+      - 8888:8888
+
+  registry:
+    build: base-regist
+    container_name: registry
+    ports:
+      - 8761:8761
+    links: 
+      - config
+
+  zipkin:
+    build: base-zipkin
+    container_name: zipkin
+    ports:
+      - 7000:7000
+    links: 
+      - rabbitmq
+  
+  useraccount-service:
+    build: dev999-useraccount-service
+    ports:
+      - 8000:8000
+    links: 
+      - rabbitmq
+      - config
+  
+  website-api:
+    build: dev999-website-api
+    ports:
+      - 8080:8080
+    links: 
+      - rabbitmq
+      - config
+  
+networks:
+  default:
+    external:
+      name: dockerWork
